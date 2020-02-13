@@ -1,0 +1,5 @@
+C:\Users\andre\Documents\HVL Dataingeniør\3.klasse\DAT154\DAT154_assignment_3\Task 1\bin\Debug\Task 1.pdb
+C:\Users\andre\Documents\HVL Dataingeniør\3.klasse\DAT154\DAT154_assignment_3\Task 1\obj\Debug\Task 1.pdb
+C:\Users\andre\Documents\HVL Dataingeniør\3.klasse\DAT154\DAT154_assignment_3\Task 1\obj\Debug\Task 1.csprojAssemblyReference.cache
+C:\Users\andre\Documents\HVL Dataingeniør\3.klasse\DAT154\DAT154_assignment_3\Task 1\bin\Debug\Task 1.dll
+C:\Users\andre\Documents\HVL Dataingeniør\3.klasse\DAT154\DAT154_assignment_3\Task 1\obj\Debug\Task 1.dll
