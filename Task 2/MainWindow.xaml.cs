@@ -14,6 +14,7 @@ namespace Task_2
     public partial class MainWindow : Window
     {
         public Star star;
+        public string CurrentName = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -32,12 +33,15 @@ namespace Task_2
             double nullW = star.XPos + (Width / 2) - star.ObjectRadius;
             double nullH = star.YPos + (Height / 2) - star.ObjectRadius;
 
+            Sun.MouseEnter += AddName;
+
             Canvas.SetLeft(Sun, nullW - star.ObjectRadius);
             Canvas.SetTop(Sun, nullH - star.ObjectRadius);
 
             star.t.Tick += (object sender, EventArgs e) =>
             {
                 Solarsystem.Children.Clear();
+                Solarsystem.Children.Add(GetTextBox());
                 Solarsystem.Children.Add(Sun);
 
                 foreach (Planet p in star.planets)
@@ -55,6 +59,8 @@ namespace Task_2
                     Canvas.SetLeft(s, nullWP);
                     Canvas.SetTop(s, nullHP);
 
+                    s.MouseEnter += AddName;
+
                     Solarsystem.Children.Add(s);
 
                     foreach (Moon m in p.Moons)
@@ -69,10 +75,43 @@ namespace Task_2
                         Canvas.SetLeft(sm, nullWP + m.XPos + m.ObjectRadius - m.OrbitalRadius);
                         Canvas.SetTop(sm, nullHP + m.YPos + m.ObjectRadius - m.OrbitalRadius);
 
+                        sm.MouseEnter += AddName;
+
                         Solarsystem.Children.Add(sm);
                     }
                 }
             };
+        }
+
+        private void AddName(object sender, MouseEventArgs e)
+        {
+            Point mouse = e.GetPosition(Application.Current.MainWindow);
+            mouse.X -= (Width / 2) - star.ObjectRadius;
+            mouse.Y -= (Height / 2) - star.ObjectRadius;
+            if ((mouse.X < 50 && mouse.Y < 50) && (mouse.X > -50 && mouse.Y > -50))
+            {
+                CurrentName = star.Name;
+            }
+            else
+            {
+                mouse.X += (star.ObjectRadius / 2) - 10;
+                foreach (Planet p in star.planets)
+                {
+                    if(mouse.X > p.OrbitalRadius)
+                    {
+                        CurrentName = p.Name;
+                    } else
+                    {
+                        foreach (Moon m in p.Moons)
+                        {
+                            if (mouse.X < m.XPos + m.ObjectRadius && mouse.Y < m.YPos + m.ObjectRadius)
+                            {
+                               // CurrentName = m.Name;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -94,6 +133,17 @@ namespace Task_2
                 default:
                     return;
             }
+        }
+
+        private TextBox GetTextBox()
+        {
+            TextBox tb = new TextBox();
+            tb.Background = Brushes.Black;
+            tb.Foreground = Brushes.White;
+            tb.BorderThickness = new Thickness(0);
+            tb.Text = CurrentName;
+            tb.FontSize = 30;
+            return tb;
         }
     }
 }
