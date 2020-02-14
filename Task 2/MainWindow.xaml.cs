@@ -6,6 +6,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Space;
 
+// Kenneth har godkjent 14.02
+
 namespace Task_2
 {
     /// <summary>
@@ -100,15 +102,6 @@ namespace Task_2
                     if(mouse.X > p.OrbitalRadius)
                     {
                         CurrentName = p.Name;
-                    } else
-                    {
-                        foreach (Moon m in p.Moons)
-                        {
-                            if (mouse.X < m.XPos + m.ObjectRadius && mouse.Y < m.YPos + m.ObjectRadius)
-                            {
-                               // CurrentName = m.Name;
-                            }
-                        }
                     }
                 }
             }
